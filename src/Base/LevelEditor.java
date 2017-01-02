@@ -40,7 +40,7 @@ public class LevelEditor extends BasicGameState{
 				 	213,  68,  70,  75,  71,  39,  
 				 	 73,   128, 182, 183, 142, 215,  
 				 	149, 87,  166, 167, 168, 169,
-				 	218,  220, 221,   -1,  -1,  -1, 
+				 	218,  220, 221, 226,  -1,  -1, 
 				 	155, 193, 194, 195, 198, 197
 				 	
 				 	};
@@ -85,7 +85,11 @@ public class LevelEditor extends BasicGameState{
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		LevelLoader.LevelSet = "1";
+		try{
 		openLevel = LevelLoader.loadLevel("Temp.txt");
+		}catch(Exception e){
+			openLevel = createDefaultLevel(32, 32);
+		}
 	}
 
 	@Override
@@ -217,7 +221,7 @@ public class LevelEditor extends BasicGameState{
 		
 	}
 	public void playTest(StateBasedGame sbg){
-		if(openLevel.Players.isEmpty()){
+		if(openLevel.getPlayerCount() <= 0){
 			JOptionPane.showMessageDialog(null, ERROR_MESSAGE_NO_PLAYER, "Bummer", JOptionPane.PLAIN_MESSAGE);
 			
 		}else{
@@ -254,19 +258,21 @@ public class LevelEditor extends BasicGameState{
 	}
 	
 	boolean isPlacingTrap;
+	TrapToggle lastPlacedTrap;
 	boolean isPlacingSpawner;
+	SpawnerToggle lastPlacedSpawner;
 	
 	public void useBush(int brush, Position position){
 		if(isPlacingTrap && (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())) {
 			isPlacingTrap = false;
-			TrapToggle t =(TrapToggle) openLevel.Traps.get(openLevel.Traps.size() -1);
-			t.setTarget(position);
+			//TrapToggle t =(TrapToggle) openLevel.Traps.get(openLevel.Traps.size() -1);
+			lastPlacedTrap.setTarget(position);
 			openLevel.setTile(position, Tile.Trap_Closed);
 			return;
 		}if(isPlacingSpawner && (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())) {
 			isPlacingSpawner = false;
-			SpawnerToggle t =(SpawnerToggle) openLevel.Traps.get(openLevel.Traps.size() -1);
-			t.setTarget(position);
+			//SpawnerToggle t =(SpawnerToggle) openLevel.Traps.get(openLevel.Traps.size() -1);
+			lastPlacedSpawner.setTarget(position);
 			openLevel.setTile(position, Tile.Metal_Wall);
 			return;
 		}
@@ -281,25 +287,28 @@ public class LevelEditor extends BasicGameState{
 				
 			if (ent instanceof LinearEntity){
 				openLevel.removeFloorEntity(position, position.dir);
-				openLevel.floorEntities.add(ent);
+				openLevel.addEntity(ent);
 				
 			}else if(ent instanceof Player){
 				openLevel.removeEntity(position);
-				openLevel.addPlayer(ent);
+				openLevel.addEntity(ent);
 			}else if(ent instanceof TrapToggle){
 				if(  (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())){
 					isPlacingTrap = true;
-					openLevel.Traps.add(ent);
+					lastPlacedTrap = (TrapToggle) ent;
+					openLevel.addEntity(ent);
 					openLevel.setTile(position, Tile.Button_Trap);
 				}
 			}else if(ent instanceof SpawnerToggle){
 				if(  (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())){
 					isPlacingSpawner = true;
-					openLevel.Traps.add(ent);
+					lastPlacedSpawner = (SpawnerToggle) ent;
+					openLevel.addEntity(ent);
 					openLevel.setTile(position, Tile.Button_Red);
 				}
 			}else{
-				openLevel.removeEntity(openLevel.entities, position);
+				//openLevel.removeEntity(openLevel.entities, position);
+				openLevel.removeEntity(position);
 				openLevel.addEntity(ent);
 			}
 		}else if(brush == 155){
@@ -365,6 +374,8 @@ public class LevelEditor extends BasicGameState{
 			return new IceBlock(position);
 		case 218:
 			return new YellowTank(position);
+		case 226:
+			return new Turret(position);
 		
 		}
 		

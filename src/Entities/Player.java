@@ -141,8 +141,8 @@ public class Player extends MovingEntity{
 	@Override
 	public void onCommitMove(Position target, Level level) {
 		if(level.getTile(target) == Tile.Checkpoint){
-			level.Players.remove(this);
-			level.Players.add(this);
+			//level.Players.remove(this);
+			//level.Players.add(this);
 			
 			LevelLoader.saveCheckPoint(level, "CheckPoint.txt");
 			level.CheckpointEnabled = true;

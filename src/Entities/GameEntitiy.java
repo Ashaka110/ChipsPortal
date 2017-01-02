@@ -3,6 +3,7 @@ package Entities;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import Entities.PortalEntities.LinearEntity;
 import Recources.Libraries.TileProperties;
 import Recources.Libraries.Direction;
 import Recources.Libraries.Tile;
@@ -71,5 +72,9 @@ public abstract class GameEntitiy {
 	@Override
 	public String toString() {
 		return getName() + " " + position.x + " " + position.y + " " + position.dir.index + "\n"; 
+	}
+	
+	public boolean isFloorEntity(){
+		return this instanceof LinearEntity;
 	}
 }

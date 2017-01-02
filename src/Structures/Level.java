@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import javax.sound.sampled.Line;
 
+import Entities.Button;
 import Entities.GameEntitiy;
 import Entities.Player;
 import Entities.SpawnerToggle;
@@ -29,12 +30,12 @@ public class Level {
 	
 	public boolean CheckpointEnabled;
 	
-	private ArrayList<GameEntitiy> floorEntities;
-	private ArrayList<GameEntitiy> portalFisslers;
-	private ArrayList<GameEntitiy> entities;
-	private ArrayList<GameEntitiy> Players;
-	private ArrayList<GameEntitiy> Portals;
-	private ArrayList<GameEntitiy> Traps;
+	public ArrayList<GameEntitiy> floorEntities;
+	public ArrayList<GameEntitiy> portalFisslers;
+	public ArrayList<GameEntitiy> entities;
+	public ArrayList<GameEntitiy> Players;
+	public ArrayList<GameEntitiy> Portals;
+	public ArrayList<GameEntitiy> Traps;
 	
 	public Player activePlayer;
 	
@@ -195,7 +196,6 @@ public class Level {
 		
 		ents.addAll( entities);
 		ents.addAll( Players);
-		//ents.addAll( entities);
 		ents.addAll( floorEntities);
 		ents.addAll( Traps);
 		
@@ -206,7 +206,6 @@ public class Level {
 		
 		ents.addAll( getGameEntitys(entities, pos));
 		ents.addAll( getGameEntitys(Players, pos));
-		//ents.addAll( getGameEntitys(entities, pos));
 		ents.addAll( getGameEntitys(floorEntities, pos));
 		ents.addAll( getGameEntitys(Traps, pos));
 		
@@ -427,12 +426,26 @@ public class Level {
 	}
 	
 	public void addEntity(GameEntitiy entity){
+		if(entity instanceof Button){
+			Traps.add(entity);
+		}else
+		if(entity.isFloorEntity()){
+			floorEntities.add(entity);
+		}else
 		if(entity instanceof Player && getTile(entity.position) != Tile.Metal_Wall){
 			Players.add(entity);
 			activePlayer = (Player) entity;
 		}else
 		entities.add(entity);
 	}
+	
+	public ArrayList<GameEntitiy> getPlayers(){
+		return Players;
+	}
+	public ArrayList<GameEntitiy> getFloorEntities(){
+		return Players;
+	}
+	
 	public void addPortal(GameEntitiy entity){
 		if(!Portals.contains(entity))
 			Portals.add(entity);
@@ -454,6 +467,11 @@ public class Level {
 	public void addPlayer(GameEntitiy p) {
 		Players.add(p);
 	}
+	
+	public int getPlayerCount(){
+		return Players.size();
+	}
+	
 	public void removeEntity(ArrayList<GameEntitiy> ents, Position pos){
 		for(int i =0; i<ents.size(); i++){
 			if(ents.get(i).position.equals(pos) ){
@@ -473,7 +491,6 @@ public class Level {
 	public void removeEntity(Position pos){
 		removeEntity(entities, pos);
 		removeEntity(Players, pos);
-		removeEntity(entities, pos);
 		removeEntity(floorEntities, pos);
 		removeEntity(Traps, pos);
 	}

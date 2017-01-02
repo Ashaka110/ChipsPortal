@@ -1,8 +1,11 @@
 package Entities.PortalEntities;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import Entities.GameEntitiy;
 import Entities.MovingEntity;
 import Entities.Player;
 import Recources.Renderer;
@@ -18,10 +21,10 @@ public class Turret extends MovingEntity{
 	
 	public Turret(Position pos) {
 		super(pos);
-		_ImageUpIndex = 110; 
-		_ImageRightIndex = 110; 
-		_ImageDownIndex = 110;
-		_ImageLeftIndex = 110;
+		_ImageUpIndex = 226; 
+		_ImageRightIndex = 227; 
+		_ImageDownIndex = 226;
+		_ImageLeftIndex = 226;
 	}
 	
 	@Override
@@ -38,9 +41,12 @@ public class Turret extends MovingEntity{
 
 	@Override
 	public boolean makeMoveDecision(Level level) {
-		for(int i =0; i < level.Players.size(); i++){
-			if(rayTrace(level, position, level.Players.get(i).position)){
-				target =(Player) level.Players.get(i);
+		ArrayList<GameEntitiy> Players = level.getPlayers();
+		//TODO
+		
+		for(int i =0; i < Players.size(); i++){
+			if(rayTrace(level, position, Players.get(i).position)){
+				target =(Player) Players.get(i);
 			}
 		}
 		

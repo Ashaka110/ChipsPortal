@@ -54,15 +54,15 @@ p  9 18 2 0
 inventory  0 0 0 0 0 0 0 0 0 
 p  17 30 2 0 
 inventory  0 0 0 0 0 0 0 0 0 
-p  41 42 0 0 
+p  41 42 1 0 
 inventory  0 0 0 0 0 0 0 0 0 
 t 0 
 level 1
 block 24 8 1 0
 block 25 8 3 0
-bug 16 6 2 0
-bug 16 8 2 0
-bug 16 10 2 0
+bug 19 8 0 0
+bug 18 7 3 0
+bug 18 5 0 0
 block 14 36 3 0
 tank 11 30 0 0
 tank 11 26 0 0
@@ -71,8 +71,11 @@ block 15 35 2 0
 block 15 37 2 0
 block 13 37 2 0
 fireball 39 42 3 0
-ball 38 39 1 0 
+ball 39 39 3 0 
 glider 39 34 0 0
+fireball 34 42 3 0
+fireball 36 42 3 0
+fireball 38 42 3 0
 spawner 39 39 1 39 42 -1
 trap 37 31 1 39 31 -1
 trap 37 34 0 39 34 -1
