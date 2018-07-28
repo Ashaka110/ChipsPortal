@@ -35,7 +35,7 @@ public class IceBlock extends Block{
 			}
 		}
 
-	//	isAlreadyinPushSequence = false;
+		isAlreadyinPushSequence = false;
 		
 		return super.move(dir, level);
 	}

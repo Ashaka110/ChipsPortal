@@ -634,4 +634,6 @@ public class Level {
 	public boolean isOffBoard(Position p){
 		return p.x < 0 || p.y < 0 || p.y > board.length -1 || p.x > board[0].length -1;
 	}
+	
+	
 }

@@ -264,15 +264,17 @@ public abstract class MovingEntity extends GameEntitiy implements Cloneable{
 		if(freezeUntilNextFrame){
 			//return false;
 		}
+		
 		Position target = level.getPostitionInDiretion(position, dir);
-		boolean tempPortaltest = false;
+		boolean isGoingThroughPortal = false;
+		
 		if(level.directionLeadsToPortal(position, dir))
 		{
 			if(this instanceof PortalFissler){
 				isAlive = false;
 				return false;
 			}
-			tempPortaltest = true;
+			isGoingThroughPortal = true;
 			System.out.println("Move:  " + target.x + " " + target.y + " " + target.dir.name() + " " + level.getTile(target));			
 			
 			Position p = position.add(Position.direction(dir));
@@ -287,14 +289,14 @@ public abstract class MovingEntity extends GameEntitiy implements Cloneable{
 			Tile targetTile = level.getTile(target);
 			if(canMoveToTile(targetTile)){
 				onMove(target, level);
-				if((targetTile.isFunnel() || level.getTile(position).isFunnel()) && !tempPortaltest){
+				if((targetTile.isFunnel() || level.getTile(position).isFunnel()) && !isGoingThroughPortal){
 					movementOffset =new Vector2().add(target).scale(-1).add(movementOffset.add(position));// position);		
 				}else
 					movementOffset =new Vector2().add(target).scale(-1).add(Position.direction(target.dir.reverse()).add(target));// position);
 				this.position = target;
 				
 				
-				if(tempPortaltest)
+				if(isGoingThroughPortal)
 				{
 					OnEnterPortal(dir, target.dir);
 					

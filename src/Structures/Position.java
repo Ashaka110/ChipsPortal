@@ -28,6 +28,10 @@ public class Position {
 		return new Position(b.x + x, b.y + y);
 	}
 	
+	public Position add (int bx, int by){
+		return new Position(bx + x, by + y);
+	}
+	
 	public boolean equals(Position b){
 		return b.x == x && b.y == y;
 	}

@@ -76,16 +76,33 @@ public class LightBridge extends LinearEntity{
 		return Tile.Light_Bridge;
 	}
 	
-	@Override
+//	@Override
+//	public int getTileSpriteIndex(Direction dir) {
+//		if(dir == Direction.North  || dir == Direction.South){
+//			return 143;
+//		}else{
+//			return 142;
+//		}
+//		
+//	}
 	public int getTileSpriteIndex(Direction dir) {
-		if(dir == Direction.North  || dir == Direction.South){
+		switch(dir){
+		case East:
+			return 231;
+		case North:
+			return 234;
+		case Null:
 			return 143;
-		}else{
-			return 142;
+		case South:
+			return 232;
+		case West:
+			return 233;
+		default:
+			return 143;
+			
 		}
 		
 	}
-
 
 	@Override
 	public int getEmitterSpriteIndex(Direction dir) {
