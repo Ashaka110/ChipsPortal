@@ -5,6 +5,8 @@ import org.newdawn.slick.Image;
 import Entities.StandardEnemies.Block;
 import Recources.Libraries.Angle;
 import Recources.Libraries.Direction;
+import Recources.Libraries.Tile;
+import Recources.Libraries.TileProperties;
 import Recources.SpriteManager;
 import Structures.Level;
 import Structures.Position;
@@ -17,6 +19,7 @@ public class Reflector extends Block{
 	public Reflector(Position pos, int rotation) {
 		super(pos);
 		angle = Angle.getAngle(rotation);
+		relations[Tile.Water.index] = TileProperties.Deadly;
 	}
 	
 	

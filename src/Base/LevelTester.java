@@ -53,6 +53,7 @@ public class LevelTester extends LevelPlayer {
 	@Override
 	public void onWin(StateBasedGame sbg) {
 		JOptionPane.showMessageDialog(null, "you Win!", "woo", JOptionPane.PLAIN_MESSAGE);
+		InputManager.ClearInput();
 		sbg.enterState(Game.editor);
 	}
 	

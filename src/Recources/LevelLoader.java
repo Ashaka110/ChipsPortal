@@ -45,20 +45,40 @@ public class LevelLoader {
 	
 	public static Level loadLevel(int levelNumber){
 		
-		return loadLevel("LevelSet" +  LevelSet + "/Level" + levelNumber +".txt");
+		//return loadLevel("LevelSet" +  LevelSet + "/Level" + levelNumber +".txt");
+		return loadLevel(FindLevel(LevelSet, levelNumber));
 	}
 	
 	public static Level loadLevel(String levelSet, int levelNumber){
 		
-		return loadLevel("LevelSet" +  levelSet + "/Level" + levelNumber +".txt");
+		//return loadLevel("LevelSet" +  levelSet + "/Level" + levelNumber +".txt");
+		return loadLevel(FindLevel(levelSet, levelNumber));
 	}
 	
+	static String FindLevel(String levelSet, int levelNumber) {
+		File f = new File("LevelSet" +  levelSet);
+		String[] pathnames = f.list();
+		
+		for(String path : pathnames) {
+			String[] s = path.split("[-/.]");
+			System.out.println(s[0]);
+			System.out.println(s[1]);
+			if(s[0].equals("Level" + levelNumber)) {
+				return "LevelSet"+levelSet+"/"+path;
+			}
+		}
+		return "";
+	}
 	
 	private static Scanner openFile(String filename) {
+		String[] s = filename.split("/");
+		System.out.println(s);
+		
+		
 		try{
 			return new Scanner(new File(filename));
 		}catch(Exception e){
-			System.out.print("unable to locate file");
+			System.out.println("unable to locate file "+filename);
 			return null;
 		}
 	}

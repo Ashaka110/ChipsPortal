@@ -1,5 +1,6 @@
 package Entities.StandardEnemies;
 
+import Entities.GameEntitiy;
 import Entities.MovingEntity;
 import Recources.Libraries.Direction;
 import Recources.Libraries.Tile;
@@ -26,7 +27,9 @@ public class Teeth extends MovingEntity {
 		if(isOddMove)
 		{
 			isOddMove = false;
-			MoveTowards(level.getNearestPlayer(position).position, level);
+			GameEntitiy player = level.getNearestPlayer(position);
+			if(player != null)
+				MoveTowards(player.position, level);
 		}else{
 			isOddMove = true;
 		}

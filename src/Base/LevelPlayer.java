@@ -145,6 +145,7 @@ public class LevelPlayer extends BasicGameState{
 				}
 				if(!level.isPlayerAlive()){
 					JOptionPane.showMessageDialog(null, "Oops!", "Bummer", JOptionPane.PLAIN_MESSAGE);
+					InputManager.ClearInput();
 					this.resetLevel();
 					//Sys.alert("hi", "woo");
 				}
@@ -164,7 +165,7 @@ public class LevelPlayer extends BasicGameState{
 			if(InputManager.isZoomButtonPressed()){
 				tileDrawSize = Renderer.TILE_SOURCE_WIDTH;
 			} else{
-				tileDrawSize = Renderer.TILE_SOURCE_WIDTH * 2;
+				tileDrawSize = Renderer.TILE_SOURCE_WIDTH;
 			}
 			//if(InputManager.getScroll() != 0)
 			//System.out.println(InputManager.getScroll());
@@ -200,6 +201,7 @@ public class LevelPlayer extends BasicGameState{
 	}
 	
 	public void resetLevel(){
+		InputManager.ClearInput();
 		if(level.CheckpointEnabled){
 			loadLevel("CheckPoint.txt");
 			level.CheckpointEnabled = true;
@@ -211,6 +213,7 @@ public class LevelPlayer extends BasicGameState{
 	
 	public void onWin(StateBasedGame sbg){
 		JOptionPane.showMessageDialog(null, "you Win!", "Conratulations", JOptionPane.PLAIN_MESSAGE);
+		InputManager.ClearInput();
 		advanceLevel();
 	}
 }

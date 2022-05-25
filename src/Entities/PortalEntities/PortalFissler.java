@@ -21,6 +21,8 @@ public class PortalFissler extends MovingEntity{
 		relations[Tile.Water.index] = TileProperties.Passable;
 
 		relations[Tile.Laser.index] = TileProperties.Passable;
+		relations[Tile.Gravel.index] = TileProperties.Passable;
+		relations[Tile.Popup_Wall.index] = TileProperties.Passable;
 
 	}
 

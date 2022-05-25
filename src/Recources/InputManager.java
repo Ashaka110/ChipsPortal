@@ -1,6 +1,7 @@
 package Recources;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 import Recources.Libraries.Direction;
@@ -9,23 +10,69 @@ import Structures.Vector2;
 public class InputManager {
 	
 	public static Input input;
+	public static GameContainer gameContainer;
 	
 	static Direction lastDiretionPressed;
 	
+	static boolean leftpause;
+	static boolean rightpause;
+	static boolean uppause;
+	static boolean downpause;
+	
+	
+	public static void ClearInput() {
+		System.out.println("Clearing Input");
+
+		uppause = true;
+		downpause = true;
+		rightpause = true;
+		leftpause = true;
+	}
+	
 	public static Boolean isLeftButtonPressed(){
+		if(leftpause) {			
+			if(input.isKeyPressed(Input.KEY_A)) {
+				leftpause = false;
+				return true;
+			}else return false;
+		}else
 		return input.isKeyDown(Input.KEY_A);
 	}
 	public static Boolean isRightButtonPressed(){
+		if(rightpause) {
+			if(input.isKeyPressed(Input.KEY_D)) {
+				rightpause = false;
+				return true;
+			}else return false;
+		}else
 		return input.isKeyDown(Input.KEY_D);
 	}
 	public static Boolean isDownButtonPressed(){
+		if(downpause) {
+			if(input.isKeyPressed(Input.KEY_S)) {
+				downpause = false;
+				return true;
+			}else return false;
+		}else
 		return input.isKeyDown(Input.KEY_S);
 	}
 	public static Boolean isUpButtonPressed(){
+		if(uppause) {
+			if(input.isKeyPressed(Input.KEY_W)) {
+				uppause = false;
+				return true;
+			}else return false;
+		}else
 		return input.isKeyDown(Input.KEY_W);
 	}
 	
 	public static Direction getMoveAxis(){
+		
+		//ClearInput();
+		//if(input.isKeyPressed(Input.KEY_A)) 
+		{
+			//System.out.println("Why");
+		}
 		if(isLeftButtonPressed()){
 			return Direction.West;
 		}else if(isRightButtonPressed()){

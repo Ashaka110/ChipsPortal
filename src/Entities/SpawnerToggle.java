@@ -45,7 +45,7 @@ public class SpawnerToggle extends Button{
 	public void onPress(Level level){
 		if(targetPosition != null) {
 			ArrayList<GameEntitiy> ents =  level.getGameEntitys(targetPosition);
-			System.out.println(ents.size());
+			//System.out.println(ents.size());
 			for (int i = 0; i < ents.size(); i++) {
 				if(ents.get(i) instanceof MovingEntity){
 					MovingEntity a = ((MovingEntity)ents.get(i)).cloned();
@@ -53,7 +53,7 @@ public class SpawnerToggle extends Button{
 						level.addEntity(a);
 						a.freezeUntilNextFrame = true;
 					}
-					System.out.println("Spawned");
+					//System.out.println("Spawned");
 				}
 			}
 		}

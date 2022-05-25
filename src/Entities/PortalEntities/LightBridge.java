@@ -88,15 +88,15 @@ public class LightBridge extends LinearEntity{
 	public int getTileSpriteIndex(Direction dir) {
 		switch(dir){
 		case East:
-			return 231;
+			return 142;//231;
 		case North:
-			return 234;
+			return 143;//234;
 		case Null:
-			return 143;
+			return 143;//143;
 		case South:
-			return 232;
+			return 143;//232;
 		case West:
-			return 233;
+			return 142;//233;
 		default:
 			return 143;
 			

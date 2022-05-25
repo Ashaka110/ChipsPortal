@@ -44,7 +44,8 @@ public class Game extends StateBasedGame{
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 
-		SpriteManager.loadSprites();	
+		SpriteManager.loadSprites();
+		InputManager.gameContainer = gc;
 		InputManager.input = gc.getInput();
 		FontManager.initFonts();
 		

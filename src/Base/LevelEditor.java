@@ -88,7 +88,7 @@ public class LevelEditor extends BasicGameState{
 		try{
 		openLevel = LevelLoader.loadLevel("Temp.txt");
 		}catch(Exception e){
-			openLevel = createDefaultLevel(32, 32);
+			openLevel = createDefaultLevel(18, 18);
 		}
 	}
 
@@ -193,7 +193,7 @@ public class LevelEditor extends BasicGameState{
 		if(brushSelected == 194){
 			playTest(sbg);
 		}else if(brushSelected == 195){
-			openLevel = createDefaultLevel(32, 32);
+			openLevel = createDefaultLevel(18, 18);
 		}else if(brushSelected == 197){
 			sbg.enterState(Game.menu);
 		}else if(brushSelected == 193){
@@ -209,9 +209,10 @@ public class LevelEditor extends BasicGameState{
 				Level lev = LevelLoader.loadLevel("1", level);
 				if(lev!=null)
 					openLevel = lev;
-				else
+				else {
 					JOptionPane.showMessageDialog(null, "Level does not yet exist.", "Bummer", JOptionPane.PLAIN_MESSAGE);
-				
+					InputManager.ClearInput();
+				}
 			}//GuiManager.createGUI();
 		}else if(left)
 			leftBrush = brushSelected;
@@ -223,7 +224,7 @@ public class LevelEditor extends BasicGameState{
 	public void playTest(StateBasedGame sbg){
 		if(openLevel.getPlayerCount() <= 0){
 			JOptionPane.showMessageDialog(null, ERROR_MESSAGE_NO_PLAYER, "Bummer", JOptionPane.PLAIN_MESSAGE);
-			
+			InputManager.ClearInput();
 		}else{
 			LevelLoader.saveLevel(openLevel, "Temp.txt");
 		  levelTester.loadLevel(LevelLoader.loadLevel("Temp.txt"));
