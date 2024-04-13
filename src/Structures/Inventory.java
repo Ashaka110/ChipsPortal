@@ -27,6 +27,7 @@ public class Inventory {
 	
 	public boolean hasFireBoots, hasIceSkates, hasForceBoots, hasFlippers;
 	
+	public boolean hasSinglePortalGun;
 	public boolean hasPortalGun;
 	
 	public Inventory(){

@@ -47,6 +47,10 @@ public abstract class MovingEntity extends GameEntitiy implements Cloneable{
 		relations[Tile.Trap_Open.index] = TileProperties.Passable;
 		relations[Tile.Trap_Closed.index] = TileProperties.Passable;
 		
+		relations[Tile.Button_Purple.index] = TileProperties.Passable;
+		relations[Tile.Purple_Wall_Open.index] = TileProperties.Passable;
+		relations[Tile.Purple_Wall_Closed.index] = TileProperties.Blocking;
+		
 		relations[Tile.Teleport.index] = TileProperties.Passable;
 		relations[Tile.Hint.index] = TileProperties.Passable;
 		relations[Tile.Checkpoint.index] = TileProperties.Passable;

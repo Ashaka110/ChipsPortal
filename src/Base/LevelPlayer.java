@@ -45,7 +45,7 @@ public class LevelPlayer extends BasicGameState{
 	}
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		LevelLoader.LevelSet = "1";
+		LevelLoader.LevelSet = "2";
 		level = LevelLoader.loadLevel(levelNumber);
 	}
 

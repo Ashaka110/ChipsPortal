@@ -19,7 +19,8 @@ public class Libraries {
 		ExcursionFunnel_Random(181), ExcursionFunnel_Up(181), ExcursionFunnel_Right(181), ExcursionFunnel_Down(181),
 		ExcursionFunnel_Left(181), 
 		ThinWall_N(211), ThinWall_E(212), ThinWall_S(213), ThinWall_W(214), ThinWall_SE(210),
-		Ice(45), Ice_NW(48), Ice_NE(49), Ice_SE(46), Ice_SW(47), Theif(71), Portal_Gun(128);
+		Ice(45), Ice_NW(48), Ice_NE(49), Ice_SE(46), Ice_SW(47), Theif(71), Portal_Gun(128), Single_Portal_Gun(160), 
+		Button_Purple(165), Purple_Wall_Open(170), Purple_Wall_Closed(175);
 		
 		public int index;
 		

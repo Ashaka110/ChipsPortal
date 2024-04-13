@@ -9,6 +9,7 @@ import java.util.Scanner;
 import Entities.Button;
 import Entities.GameEntitiy;
 import Entities.Player;
+import Entities.PurpleToggle;
 import Entities.SpawnerToggle;
 import Entities.TrapToggle;
 import Entities.PortalEntities.ExcursionFunnel;
@@ -203,6 +204,8 @@ public class LevelLoader {
 				//this.lazer.add(new LazerField(scan.nextInt(),scan.nextInt(),scan.nextInt(),scan.nextInt(), board, pl, monster));
 				level.addEntity(new Laser(new Position(scan.nextInt(), scan.nextInt(), scan.nextInt())));
 				scan.nextInt();
+			}else if(n.equals("purpletoggle")){
+				level.addEntity(new PurpleToggle(new Position(scan.nextInt(), scan.nextInt(), scan.nextInt()), new Position(scan.nextInt(), scan.nextInt(), scan.nextInt())));
 			}else if(n.equals("trap")){
 				level.addEntity(new TrapToggle(new Position(scan.nextInt(), scan.nextInt(), scan.nextInt()), new Position(scan.nextInt(), scan.nextInt(), scan.nextInt())));
 			}else if(n.equals("spawner")){
@@ -307,7 +310,10 @@ public class LevelLoader {
 		}
 		for (int c=0; c< entities.size(); c++){
 			Position p = entities.get(c).position;
-			if (entities.get(c) instanceof TrapToggle){
+			if (entities.get(c) instanceof PurpleToggle){
+				Position t =((Button) entities.get(c)).targetPosition;
+				text.format("%s %s %s %s %s %s %s\n", "purpletoggle" ,  p.x, p.y, p.dir.index, t.x, t.y, t.dir.index);
+			}else if (entities.get(c) instanceof TrapToggle){
 				Position t =((Button) entities.get(c)).targetPosition;
 				text.format("%s %s %s %s %s %s %s\n", "trap" ,  p.x, p.y, p.dir.index, t.x, t.y, t.dir.index);
 			}if (entities.get(c) instanceof SpawnerToggle){

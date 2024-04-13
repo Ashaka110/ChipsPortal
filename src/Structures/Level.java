@@ -378,6 +378,10 @@ public class Level {
 				if(board[x][y] == Tile.Trap_Open){
 					board[x][y] = Tile.Trap_Closed;
 				}
+				if(board[x][y] == Tile.Purple_Wall_Open){
+					board[x][y] = Tile.Purple_Wall_Closed;
+				}
+
 			}
 		}
 	}

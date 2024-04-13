@@ -28,25 +28,25 @@ import Structures.Vector2;
 public class LevelEditor extends BasicGameState{
 	int _state;
 	
-	int[] toolbar = {2,	 0,   1,   8,   9,   10,
-				 	 5,  4,   11,  3,   14,  7, 
-				 	19,  6,   12,  18,  16,  13, 
-				 	15,  17,  21,  22,  23,  24, 
-				 	20,  25,  26,  27,  28,  29,
-				 	184, 30,  31,  32,  33,  34, 
-				 	185, 40,  41,  42,  43,  44,
-				 	210,  45,  46,  47,  48,  49, 
-				 	212,  51,  56,  61,  66,  67,  
-				 	213,  68,  70,  75,  71,  39,  
-				 	 73,   128, 182, 183, 142, 215,  
-				 	149, 87,  166, 167, 168, 169,
-				 	218,  220, 221, 226,  -1,  -1, 
-				 	155, 193, 194, 195, 198, 197
+	int[] toolbar = {-1, 2,	 0,   1,   8,   9,   10, -1,
+				 	 -1, 5,  4,   11,  3,   14,  7,  -1,
+				 	-1, 19,  6,   12,  18,  16,  13,  -1,
+				 	-1, 15,  17,  21,  22,  23,  24,  -1,
+				 -1, 	20,  25,  26,  27,  28,  29, -1,
+				 -1, 	184, 30,  31,  32,  33,  34,  -1,
+				 -1, 	185, 40,  41,  42,  43,  44, -1,
+				 -1, 	210,  45,  46,  47,  48,  49,  -1,
+				 -1, 	212,  51,  56,  61,  66,  67,   -1,
+				 -1, 	213,  68,  70,  75,  71,  39,   -1,
+				 -1, 	 73,   128, 182, 183, 142, 215,   -1,
+				 -1, 	149, 87,  166, 167, 168, 169, -1,
+				-1,  	218,  220, 221, 226, 235,  -1,  -1,
+				-1,  	155, 193, 194, 195, 198, 197, -1,
 				 	
 				 	};
-	Vector2 toolbarPosition = new Vector2(586 + 32+16, 16);
+	Vector2 toolbarPosition = new Vector2(586 + 16, 16);
 	int toolbarTileWidth = 32;
-	int toolbarRowLength =6;
+	int toolbarRowLength =8;
 	
 	int leftBrush, rightBrush;
 	Vector2 rBrushCurserPosition;// = new Vector2(576, 0);
@@ -268,7 +268,7 @@ public class LevelEditor extends BasicGameState{
 			isPlacingTrap = false;
 			//TrapToggle t =(TrapToggle) openLevel.Traps.get(openLevel.Traps.size() -1);
 			lastPlacedTrap.setTarget(position);
-			openLevel.setTile(position, Tile.Trap_Closed);
+			openLevel.setTile(position, lastPlacedTrap.DefaultTargetTile());
 			return;
 		}if(isPlacingSpawner && (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())) {
 			isPlacingSpawner = false;
@@ -298,7 +298,7 @@ public class LevelEditor extends BasicGameState{
 					isPlacingTrap = true;
 					lastPlacedTrap = (TrapToggle) ent;
 					openLevel.addEntity(ent);
-					openLevel.setTile(position, Tile.Button_Trap);
+					openLevel.setTile(position, lastPlacedTrap.ButtonTile());
 				}
 			}else if(ent instanceof SpawnerToggle){
 				if(  (InputManager.isLeftMouseButtonPressed() || InputManager.isRightMouseButtonPressed())){
@@ -357,6 +357,8 @@ public class LevelEditor extends BasicGameState{
 			return new Turret(position);
 		case 185:
 			return new TrapToggle(position);
+		case 235:
+			return new PurpleToggle(position);
 		case 184:
 			return new SpawnerToggle(position);
 		case 182:

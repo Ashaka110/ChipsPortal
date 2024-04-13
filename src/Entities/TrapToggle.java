@@ -32,13 +32,13 @@ public class TrapToggle extends Button{
 
 	@Override
 	public void logicUpdate(Level level) {
-		if(targetPosition != null && level.getTile(position) == Tile.Button_Trap){
+		if(targetPosition != null && level.getTile(position) == ButtonTile()){
 			
 			ArrayList<GameEntitiy> ents = level.getGameEntitys(position);
 			for(int i =0; i < ents.size(); i++){
 				if(ents.get(i) instanceof MovingEntity && ! (ents.get(i) instanceof PortalFissler))
 				{
-					level.setTile(targetPosition, Tile.Trap_Open);
+					setTrapOpen(level);
 				}
 			}
 			//if(level.hasEntAt(position, Player.class)){
@@ -49,6 +49,18 @@ public class TrapToggle extends Button{
 		}
 	}
 
+	public Tile ButtonTile() {
+		return Tile.Button_Trap;
+	}
+	public Tile DefaultTargetTile() {
+		return Tile.Trap_Closed;
+	}
+
+	
+	void setTrapOpen(Level level) {
+		level.setTile(targetPosition, Tile.Trap_Open);
+	}
+	
 	@Override
 	public void frameUpdate(int deltaTimeMS, Level level) {
 		
